@@ -1,0 +1,4 @@
+/home/andrijzyn/project/TCP-Server_-SendText-/build/CMakeFiles/server.dir
+/home/andrijzyn/project/TCP-Server_-SendText-/build/CMakeFiles/client.dir
+/home/andrijzyn/project/TCP-Server_-SendText-/build/CMakeFiles/edit_cache.dir
+/home/andrijzyn/project/TCP-Server_-SendText-/build/CMakeFiles/rebuild_cache.dir
