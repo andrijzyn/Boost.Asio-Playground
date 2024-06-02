@@ -1,34 +1,56 @@
 #include <iostream>
 #include <boost/asio.hpp>
+#include <boost/asio/ip/tcp.hpp>
+#include <string>
+#include <array>
 
-using namespace boost::asio;
-using ip::tcp;
+using boost::asio::ip::tcp;
 
 int main() {
     try {
+        // Address\Port entry
+        std::string IP;
+        std::cout << "Entry IP adress: ";
+        std::cin >> IP;
+
+        std::string Enter_PORT;
+        std::cout << "Entry Port: ";
+        std::cin >> Enter_PORT;
+
+        // Create an io_service object to manage asynchronous operations
         boost::asio::io_service io_service;
 
-        // Создание объекта resolver для разрешения имени хоста в IP-адрес
+        // Create a resolver to resolve the hostname to an IP address
         tcp::resolver resolver(io_service);
 
-        // Разрешение имени хоста и порта
-        tcp::resolver::results_type endpoints = resolver.resolve("localhost", "4444");
+        // Resolve the hostname and port to get the endpoints
+        tcp::resolver::results_type endpoints = resolver.resolve(IP, Enter_PORT);
 
-        // Создание сокета и подключение к серверу
+        // Create a socket and connect to the server
         tcp::socket socket(io_service);
-        boost::asio::connect(socket, endpoints);
+        connect(socket, endpoints);
 
-        // Отправка данных на сервер
+        // Send data to the server
         std::string message = "Hello, TCP Server!";
-        boost::asio::write(socket, boost::asio::buffer(message));
+        write(socket, boost::asio::buffer(message));
 
-        // Получение ответа от сервера
+        // Receive a response from the server
         std::array<char, 128> buffer;
-        size_t bytes_transferred = socket.read_some(boost::asio::buffer(buffer));
-        std::cout << "Received response from server: " << std::string(buffer.data(), bytes_transferred) << std::endl;
+        boost::system::error_code ec;
+        size_t bytes_transferred = socket.read_some(boost::asio::buffer(buffer), ec);
 
-    } catch (std::exception& e) {
-        std::cerr << "Exception: " << e.what() << std::endl;
+        if (ec) {
+            throw boost::system::system_error(ec);
+        }
+
+        // Display the response received
+        std::cout << "Received response from server: " << std::string(buffer.data(), bytes_transferred);
+
+    } catch (const std::exception& e) {
+        // Handle any exceptions and display an error message
+        std::cerr << "Exception " << e.what() << std::endl;
+        return 1; // Return a non-zero exit code to indicate an error
     }
+
     return 0;
 }

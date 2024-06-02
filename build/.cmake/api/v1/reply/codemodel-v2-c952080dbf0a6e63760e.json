@@ -9,7 +9,7 @@
 					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.0"
+						"string" : "3.5"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -28,7 +28,7 @@
 					[
 						0
 					],
-					"name" : "Server",
+					"name" : "TCPServer",
 					"targetIndexes" : 
 					[
 						0,
@@ -41,14 +41,14 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "client::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-client-Debug-93bc3d1af687ae3b0749.json",
+					"jsonFile" : "target-client-Debug-a8760492b046d799a25e.json",
 					"name" : "client",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "server::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-server-Debug-0fc22b2bc23f991c239c.json",
+					"jsonFile" : "target-server-Debug-958e5f0c50c5c6e792c6.json",
 					"name" : "server",
 					"projectIndex" : 0
 				}

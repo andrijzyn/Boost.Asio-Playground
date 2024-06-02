@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.0)
-project(Server)
+cmake_minimum_required(VERSION 3.5)
+project(TCPServer)
 
-find_package(Boost REQUIRED COMPONENTS system thread)
+find_package(Boost REQUIRED COMPONENTS system)
 
 include_directories(${Boost_INCLUDE_DIRS})
 

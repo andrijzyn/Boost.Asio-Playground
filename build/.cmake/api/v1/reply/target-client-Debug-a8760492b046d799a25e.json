@@ -11,17 +11,11 @@
 		"commands" : 
 		[
 			"add_executable",
-			"target_link_libraries",
-			"set_property",
-			"find_package",
-			"boost_find_component"
+			"target_link_libraries"
 		],
 		"files" : 
 		[
-			"CMakeLists.txt",
-			"/usr/lib/x86_64-linux-gnu/cmake/boost_thread-1.74.0/boost_thread-config.cmake",
-			"/usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake",
-			"/usr/share/cmake-3.25/Modules/FindBoost.cmake"
+			"CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -39,48 +33,6 @@
 				"file" : 0,
 				"line" : 12,
 				"parent" : 0
-			},
-			{
-				"command" : 3,
-				"file" : 0,
-				"line" : 4,
-				"parent" : 0
-			},
-			{
-				"file" : 3,
-				"parent" : 3
-			},
-			{
-				"command" : 3,
-				"file" : 3,
-				"line" : 594,
-				"parent" : 4
-			},
-			{
-				"file" : 2,
-				"parent" : 5
-			},
-			{
-				"command" : 4,
-				"file" : 2,
-				"line" : 258,
-				"parent" : 6
-			},
-			{
-				"command" : 3,
-				"file" : 2,
-				"line" : 141,
-				"parent" : 7
-			},
-			{
-				"file" : 1,
-				"parent" : 8
-			},
-			{
-				"command" : 2,
-				"file" : 1,
-				"line" : 101,
-				"parent" : 9
 			}
 		]
 	},
@@ -101,15 +53,7 @@
 				},
 				{
 					"backtrace" : 2,
-					"define" : "BOOST_ATOMIC_DYN_LINK"
-				},
-				{
-					"backtrace" : 2,
 					"define" : "BOOST_SYSTEM_DYN_LINK"
-				},
-				{
-					"backtrace" : 2,
-					"define" : "BOOST_THREAD_DYN_LINK"
 				}
 			],
 			"language" : "CXX",
@@ -129,22 +73,12 @@
 				"role" : "flags"
 			},
 			{
-				"fragment" : "-rdynamic",
+				"fragment" : "",
 				"role" : "flags"
 			},
 			{
 				"backtrace" : 2,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_system.so.1.74.0",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_thread.so.1.74.0",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 10,
-				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.74.0",
 				"role" : "libraries"
 			}
 		],
