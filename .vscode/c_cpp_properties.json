@@ -3,7 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/Boost/include"
+                "${workspaceFolder}/include"
             ],
             "defines": [
                 "_DEBUG",
@@ -17,9 +17,7 @@
             "compilerPath": "C:/Program Files/LLVM/bin/clang++.exe",
             "compilerArgs": [
                 "-I",
-                "${fileDirname}\\Boost\\include\\boost-1_85",
-                "-L",
-                "${fileDirname}\\Boost\\lib"
+                "${fileDirname}\\Boost\\include\\boost-1_85"
             ]
         }
     ],
