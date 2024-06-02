@@ -8,6 +8,15 @@ using boost::asio::ip::tcp;
 
 int main() {
     try {
+        // Address\Port entry
+        std::string IP;
+        std::cout << "Entry IP adress: ";
+        std::cin >> IP;
+
+        std::string Enter_PORT;
+        std::cout << "Entry Port: ";
+        std::cin >> Enter_PORT;
+
         // Create an io_service object to manage asynchronous operations
         boost::asio::io_service io_service;
 
@@ -15,7 +24,7 @@ int main() {
         tcp::resolver resolver(io_service);
 
         // Resolve the hostname and port to get the endpoints
-        tcp::resolver::results_type endpoints = resolver.resolve("localhost", "4444");
+        tcp::resolver::results_type endpoints = resolver.resolve(IP, Enter_PORT);
 
         // Create a socket and connect to the server
         tcp::socket socket(io_service);

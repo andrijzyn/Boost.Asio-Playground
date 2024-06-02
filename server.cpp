@@ -3,8 +3,6 @@
 
 using boost::asio::ip::tcp;
 
-const short PORT = 4444;
-
 class TCPServer {
 public:
     TCPServer(boost::asio::io_service& io_service, short port)
@@ -45,7 +43,12 @@ private:
 
 int main() {
     try {
+        int PORT;
         boost::asio::io_service io_service;
+
+        std::cout << "Enter Server Port: ";
+        std::cin >> PORT;
+
         TCPServer server(io_service, PORT);
         io_service.run();
     } catch (std::exception& e) {
