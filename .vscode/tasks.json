@@ -15,9 +15,7 @@
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-I",
-                "${fileDirname}\\Boost\\include\\boost-1_85",
-                "-L",
-                "${fileDirname}\\Boost\\lib"
+                "${fileDirname}\\include\\boost-1_85",
             ],
             "options": {
                 "cwd": "C:\\Program Files\\LLVM\\bin"
