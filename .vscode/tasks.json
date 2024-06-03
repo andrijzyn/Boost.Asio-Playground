@@ -12,7 +12,10 @@
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
-                "-lboost_system"
+                "-I",
+                "${workspaceFolder}/include"
+
+                // "-lboost_system"
             ],
             "options": {
                 "cwd": "${fileDirname}"

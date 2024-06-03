@@ -1,11 +1,14 @@
 #include <iostream>
+#include <string>
 #include <boost/asio.hpp>
 
-using boost::asio::ip::tcp;
+using namespace std;
+using namespace boost::asio;
+using namespace boost::asio::ip;
 
 class TCPServer {
 public:
-    TCPServer(boost::asio::io_service& io_service, short port)
+    TCPServer(io_service& io_service, short port)
         : acceptor_(io_service, tcp::endpoint(tcp::v4(), port)),
           socket_(io_service) {
         do_accept();
@@ -15,24 +18,24 @@ private:
     void do_accept() {
         acceptor_.async_accept(socket_, [this](boost::system::error_code ec) {
             if (!ec) {
-                std::cout << "Client has been connected: " << socket_.remote_endpoint() << std::endl;
+                cout << "Client connected: " << socket_.remote_endpoint() << endl;
                 do_write();
             } else {
-                std::cerr << "Error accepting connection: " << ec.message() << std::endl;
+                cerr << "Error accepting connection: " << ec.message() << endl;
             }
         });
     }
 
     void do_write() {
-        std::string message = "Hello, client!\n";
-        boost::asio::async_write(socket_, boost::asio::buffer(message),
-            [this](boost::system::error_code ec, std::size_t /*length*/) {
+        string message = "Hello, client!";
+        async_write(socket_, buffer(message),
+            [this](boost::system::error_code ec, size_t /*length*/) {
                 if (!ec) {
                     socket_.close();
-                    std::cout << "Client has been disconnected. The response was received.\n" << std::endl;
+                    cout << "Message sent. Client disconnected.\n" << endl;
                     do_accept();
                 } else {
-                    std::cerr << "Error writing to socket: " << ec.message() << std::endl;
+                    cerr << "Error writing to socket: " << ec.message() << endl;
                 }
             });
     }
@@ -44,15 +47,15 @@ private:
 int main() {
     try {
         int PORT;
-        boost::asio::io_service io_service;
+        io_service io_service;
 
-        std::cout << "Enter Server Port: ";
-        std::cin >> PORT;
+        cout << "Enter Server Port: ";
+        cin >> PORT;
 
         TCPServer server(io_service, PORT);
         io_service.run();
-    } catch (std::exception& e) {
-        std::cerr << "Exception: " << e.what() << std::endl;
+    } catch (exception& e) {
+        cerr << "Exception: " << e.what() << endl;
     }
     return 0;
 }
