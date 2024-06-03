@@ -1,0 +1,4 @@
+C:/Users/Andrij Zyniuk/source/repos/Dot.matrx/TCP-Server_-SendText-/build/CMakeFiles/server.dir
+C:/Users/Andrij Zyniuk/source/repos/Dot.matrx/TCP-Server_-SendText-/build/CMakeFiles/client.dir
+C:/Users/Andrij Zyniuk/source/repos/Dot.matrx/TCP-Server_-SendText-/build/CMakeFiles/edit_cache.dir
+C:/Users/Andrij Zyniuk/source/repos/Dot.matrx/TCP-Server_-SendText-/build/CMakeFiles/rebuild_cache.dir
