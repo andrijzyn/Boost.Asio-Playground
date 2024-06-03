@@ -1,12 +1,12 @@
 [
 {
   "directory": "/home/andrijzyn/project/TCP-Server_-SendText-/build",
-  "command": "/usr/bin/clang++ -DBOOST_ALL_NO_LIB -DBOOST_SYSTEM_DYN_LINK -g -o CMakeFiles/server.dir/server.cpp.o -c /home/andrijzyn/project/TCP-Server_-SendText-/server.cpp",
+  "command": "g++-12 -I/home/andrijzyn/project/TCP-Server_-SendText-/include  -fdiagnostics-color=always -fmax-errors=5 -g -std=gnu++14 -o CMakeFiles/server.dir/server.cpp.o -c /home/andrijzyn/project/TCP-Server_-SendText-/server.cpp",
   "file": "/home/andrijzyn/project/TCP-Server_-SendText-/server.cpp"
 },
 {
   "directory": "/home/andrijzyn/project/TCP-Server_-SendText-/build",
-  "command": "/usr/bin/clang++ -DBOOST_ALL_NO_LIB -DBOOST_SYSTEM_DYN_LINK -g -o CMakeFiles/client.dir/client.cpp.o -c /home/andrijzyn/project/TCP-Server_-SendText-/client.cpp",
+  "command": "g++-12 -I/home/andrijzyn/project/TCP-Server_-SendText-/include  -fdiagnostics-color=always -fmax-errors=5 -g -std=gnu++14 -o CMakeFiles/client.dir/client.cpp.o -c /home/andrijzyn/project/TCP-Server_-SendText-/client.cpp",
   "file": "/home/andrijzyn/project/TCP-Server_-SendText-/client.cpp"
 }
 ]

@@ -83,7 +83,7 @@
 						"gcc"
 					]
 				},
-				"path" : "/usr/bin/clang++",
+				"path" : "g++-12",
 				"version" : "14.0.6"
 			},
 			"language" : "CXX",

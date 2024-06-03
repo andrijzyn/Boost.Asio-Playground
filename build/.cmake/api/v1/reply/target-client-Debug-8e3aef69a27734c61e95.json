@@ -11,7 +11,7 @@
 		"commands" : 
 		[
 			"add_executable",
-			"target_link_libraries"
+			"include_directories"
 		],
 		"files" : 
 		[
@@ -25,13 +25,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 9,
+				"line" : 14,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 12,
+				"line" : 8,
 				"parent" : 0
 			}
 		]
@@ -42,21 +42,28 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g"
+					"fragment" : " -fdiagnostics-color=always -fmax-errors=5 -g"
+				},
+				{
+					"fragment" : "-std=gnu++14"
 				}
 			],
-			"defines" : 
+			"includes" : 
 			[
 				{
 					"backtrace" : 2,
-					"define" : "BOOST_ALL_NO_LIB"
-				},
-				{
-					"backtrace" : 2,
-					"define" : "BOOST_SYSTEM_DYN_LINK"
+					"path" : "/home/andrijzyn/project/TCP-Server_-SendText-/include"
 				}
 			],
 			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "14"
+			},
 			"sourceIndexes" : 
 			[
 				0
@@ -69,17 +76,12 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-g",
+				"fragment" : "-fdiagnostics-color=always -fmax-errors=5 -g",
 				"role" : "flags"
 			},
 			{
 				"fragment" : "",
 				"role" : "flags"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_system.so.1.74.0",
-				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"

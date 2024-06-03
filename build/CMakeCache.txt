@@ -215,6 +215,15 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
+MyProject_BINARY_DIR:STATIC=/home/andrijzyn/project/TCP-Server_-SendText-/build
+
+//Value Computed by CMake
+MyProject_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+MyProject_SOURCE_DIR:STATIC=/home/andrijzyn/project/TCP-Server_-SendText-
+
+//Value Computed by CMake
 ServerClient_BINARY_DIR:STATIC=/home/andrijzyn/project/TCP-Server_-SendText-/build
 
 //Value Computed by CMake
@@ -240,6 +249,15 @@ TCPServer_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 TCPServer_SOURCE_DIR:STATIC=/home/andrijzyn/project/TCP-Server_-SendText-
+
+//Value Computed by CMake
+TCP_BINARY_DIR:STATIC=/home/andrijzyn/project/TCP-Server_-SendText-/build
+
+//Value Computed by CMake
+TCP_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+TCP_SOURCE_DIR:STATIC=/home/andrijzyn/project/TCP-Server_-SendText-
 
 //The directory containing a CMake configuration file for boost_atomic.
 boost_atomic_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_atomic-1.74.0
