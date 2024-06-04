@@ -3,6 +3,7 @@
   "files.associations": {
     "iostream": "cpp",
     "*.ipp": "cpp",
-    "array": "cpp"
+    "array": "cpp",
+    "regex": "cpp"
   }
 }
