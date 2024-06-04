@@ -1,9 +1,0 @@
-{
-  "C_Cpp.default.compilerPath": "/usr/bin/clang++-18",
-  "files.associations": {
-    "iostream": "cpp",
-    "*.ipp": "cpp",
-    "array": "cpp",
-    "regex": "cpp"
-  }
-}

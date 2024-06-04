@@ -1,57 +1,45 @@
-#include <iostream>
-#include <boost/asio.hpp>
-#include <string>
-#include <array>
+    #include <iostream>
+    #include <boost/asio.hpp>
 
-using boost::asio::ip::tcp;
+    using namespace std;
+    using namespace boost::asio;
+    using namespace boost::asio::ip;
 
-void communicate_with_server(const std::string& ip, const std::string& port) {
-    try {
-        // Create an io_context object to manage asynchronous operations
-        boost::asio::io_context io_context;
+    int main() {
+        try {
+            io_service io_service;
+            tcp::socket socket(io_service);
+            string CLIENT_ADDRESS, message;
+            
+            cout << "Please, Enter the client IP address :)" << endl;
+            getline(cin, CLIENT_ADDRESS);
 
-        // Create a resolver to resolve the hostname to an IP address
-        tcp::resolver resolver(io_context);
+            tcp::endpoint endpoint(address::from_string(CLIENT_ADDRESS), 8080); // address::from_string("127.0.0.1")
 
-        // Resolve the hostname and port to get the endpoints
-        auto endpoints = resolver.resolve(ip, port);
+            // Connect to the server
+            socket.connect(endpoint);
 
-        // Create a socket and connect to the server
-        tcp::socket socket(io_context);
-        boost::asio::connect(socket, endpoints);
+            cout << "You have been connected to the server.\n\n";
 
-        // Send data to the server
-        std::string message = "Hello, TCP Server!";
-        boost::asio::write(socket, boost::asio::buffer(message));
+            // Enter a loop to send messages to the server
+            while (true) {
+                cout << "You: ";
+                // string message;
+                getline(cin, message);
 
-        // Receive a response from the server
-        std::array<char, 128> buffer;
-        boost::system::error_code ec;
-        unsigned int bytes_transferred = socket.read_some(boost::asio::buffer(buffer), ec);
+                // Send message to server
+                write(socket, boost::asio::buffer(message + "\n"));
 
-        if (ec && ec != boost::asio::error::eof) {
-            throw boost::system::system_error(ec);
+                // Receive response from server
+                boost::asio::streambuf receive_buffer;
+                read_until(socket, receive_buffer, '\n');
+                string response = buffer_cast<const char*>(receive_buffer.data());
+
+                cout << "Server: " << response << endl;
+            }
+        } catch (exception& e) {
+            cerr << "Exception: " << e.what() << endl;
         }
 
-        // Display the response received
-        std::cout << "Received response from server: "
-                  << std::string(buffer.data(), bytes_transferred) << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "Exception: " << e.what() << std::endl;
-        std::exit(1); // Exit with a non-zero exit code to indicate an error
+        return 0;
     }
-}
-
-int main() {
-    std::string ip, port;
-
-    std::cout << "Enter IP address: ";
-    std::cin >> ip;
-
-    std::cout << "Enter Port: ";
-    std::cin >> port;
-
-    communicate_with_server(ip, port);
-
-    return 0;
-}
