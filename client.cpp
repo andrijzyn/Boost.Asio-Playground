@@ -1,45 +1,70 @@
-    #include <iostream>
-    #include <boost/asio.hpp>
+//try {
+//    } catch (exception& e) { cerr << "Exception " << e.what() << endl; }
 
-    using namespace std;
-    using namespace boost::asio;
-    using namespace boost::asio::ip;
+#include "include/includes.h"
 
-    int main() {
-        try {
-            io_service io_service;
-            tcp::socket socket(io_service);
-            string CLIENT_ADDRESS, message;
-            
-            cout << "Please, Enter the client IP address :)" << endl;
-            getline(cin, CLIENT_ADDRESS);
+shared_ptr<string> Get(const string& message) { 
+    auto GET_DATA = make_shared<string>();
+    cout << message;
+    try {
+        getline(cin, *GET_DATA);
+    } catch (...) {
+        return nullptr; 
+    }
+    return GET_DATA;
+}
 
-            tcp::endpoint endpoint(address::from_string(CLIENT_ADDRESS), 8080); // address::from_string("127.0.0.1")
+std::shared_ptr<tcp::socket> Core(io_service& io_service) { 
+    try {
+        auto socket = std::make_shared<tcp::socket>(io_service);
 
-            // Connect to the server
-            socket.connect(endpoint);
-
-            cout << "You have been connected to the server.\n\n";
-
-            // Enter a loop to send messages to the server
-            while (true) {
-                cout << "You: ";
-                // string message;
-                getline(cin, message);
-
-                // Send message to server
-                write(socket, boost::asio::buffer(message + "\n"));
-
-                // Receive response from server
-                boost::asio::streambuf receive_buffer;
-                read_until(socket, receive_buffer, '\n');
-                string response = buffer_cast<const char*>(receive_buffer.data());
-
-                cout << "Server: " << response << endl;
-            }
-        } catch (exception& e) {
-            cerr << "Exception: " << e.what() << endl;
+        auto CLI_ADDRESS = Get("Enter server IP: ");
+        if (!CLI_ADDRESS) {
+            cerr << "Failed to get server IP." << endl;
+            return nullptr;
         }
 
-        return 0;
+        tcp::endpoint endpoint(address::from_string(*CLI_ADDRESS), 8080);
+        socket->connect(endpoint); // Connect to the server
+        cout << "You have been connected to the server.\n\n";
+
+        return socket;
+    } catch (const std::exception& e) {
+        cerr << "Exception: " << e.what() << endl;
+        return nullptr;
     }
+}
+
+int main() {
+    try {
+        io_service io_service;
+        auto socket = Core(io_service);
+
+        if (!socket) {
+            cerr << "Failed to initialize socket." << endl;
+            return 1;
+        }
+
+        while (true) {
+            // Send message to server
+            auto MESSAGE = Get("Enter message: ");
+            if (!MESSAGE) {
+                cerr << "Failed to get message." << endl;
+                continue;
+            }
+            MESSAGE->append("\n");
+            write(*socket, boost::asio::buffer(*MESSAGE));
+
+            // Receive response from server
+            boost::asio::streambuf receive_buffer;
+            read_until(*socket, receive_buffer, '\n');
+            string response = buffer_cast<const char*>(receive_buffer.data());
+            cout << "Server: " << response << endl;
+        }
+    } catch (const exception& e) { 
+        cerr << "Exception: " << e.what() << endl; 
+        return 1;
+    }
+
+    return 0;
+}

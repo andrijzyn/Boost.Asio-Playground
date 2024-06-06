@@ -1,10 +1,6 @@
-#ifndef FILE2_H // Stackoverflow helped :)
-#define FILE2_H
-#include <iostream>
-#include <string>
-#include <stdexcept>
-#include <boost/asio.hpp>
-#include <memory>
+#ifndef GET_IP // Stackoverflow helped :)
+#define GET_IP
+#include "includes.h"
 
 #if defined(_WIN32) || defined(_WIN64)
     #include <winsock2.h>
@@ -14,10 +10,6 @@
     #include <array>
     #include <cstdio>
 #endif
-
-using namespace std;
-using namespace boost::asio;
-using namespace boost::asio::ip;
 
 string get_ip_address() {
 #if defined(_WIN32) || defined(_WIN64)
@@ -77,4 +69,4 @@ string get_ip_address() {
 #endif
 }
 
-#endif // FILE2_H
+#endif // GET_IP
