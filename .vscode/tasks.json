@@ -8,6 +8,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-fmax-errors=5",
+                "-std=c++23",
                 "-g",
                 "${file}",
                 "-o",

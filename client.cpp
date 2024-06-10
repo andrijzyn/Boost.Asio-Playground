@@ -3,17 +3,6 @@
 
 #include "include/includes.h"
 
-shared_ptr<string> Get(const string& message) { 
-    auto GET_DATA = make_shared<string>();
-    cout << message;
-    try {
-        getline(cin, *GET_DATA);
-    } catch (...) {
-        return nullptr; 
-    }
-    return GET_DATA;
-}
-
 std::shared_ptr<tcp::socket> Core(io_service& io_service) { 
     try {
         auto socket = std::make_shared<tcp::socket>(io_service);
