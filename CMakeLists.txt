@@ -1,14 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(TCPServer)
-
+project(Hybrid)
+set(SOURCE Hybrid.cpp)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-# Добавляем исполняемый файл для сервера
-add_executable(server server.cpp)
-
-# Добавляем исполняемый файл для клиента
-add_executable(client client.cpp)
+add_executable(${PROJECT_NAME} ${SOURCE})
 
 if(WIN32)
     set(CMAKE_CXX_COMPILER "C:/Program Files/LLVM/bin/clang++.exe")
