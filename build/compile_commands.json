@@ -1,8 +1,0 @@
-[
-{
-  "directory": "C:/Users/Andrij Zyniuk/source/repos/Dot.matrx/TCP-Server_-SendText-/build",
-  "command": "C:\\PROGRA~1\\LLVM\\bin\\CLANG_~1.EXE  @CMakeFiles/Hybrid.dir/includes_CXX.rsp  -D_WIN32_WINNT=0x0601 -g -o CMakeFiles\\Hybrid.dir\\Hybrid.cpp.obj -c \"C:\\Users\\Andrij Zyniuk\\source\\repos\\Dot.matrx\\TCP-Server_-SendText-\\Hybrid.cpp\"",
-  "file": "C:/Users/Andrij Zyniuk/source/repos/Dot.matrx/TCP-Server_-SendText-/Hybrid.cpp",
-  "output": "CMakeFiles/Hybrid.dir/Hybrid.cpp.obj"
-}
-]

@@ -1,3 +1,0 @@
-C:/Users/Andrij Zyniuk/source/repos/Dot.matrx/TCP-Server_-SendText-/build/CMakeFiles/Hybrid.dir
-C:/Users/Andrij Zyniuk/source/repos/Dot.matrx/TCP-Server_-SendText-/build/CMakeFiles/edit_cache.dir
-C:/Users/Andrij Zyniuk/source/repos/Dot.matrx/TCP-Server_-SendText-/build/CMakeFiles/rebuild_cache.dir
