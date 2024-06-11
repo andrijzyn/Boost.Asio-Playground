@@ -25,7 +25,7 @@ using namespace boost::asio::ip;
 #endif
 
 // Functions
-shared_ptr<string> Get(const string& message) {  // Func for getting data from user 
+shared_ptr<string> get(const string& message) {  // Func for getting data from user 
     auto GET_DATA = make_shared<string>();
     cout << message;
     try {
@@ -36,7 +36,7 @@ shared_ptr<string> Get(const string& message) {  // Func for getting data from u
     return GET_DATA;
 }
 
-void clear_screen() { // Func for clear terminal
+void clearScreen() { // Func for clear terminal
     #if defined(_WIN32) || defined(_WIN64)
         system("cls");
     #else
@@ -44,7 +44,7 @@ void clear_screen() { // Func for clear terminal
     #endif
 }
 
-string get_ip_address() { // Func for getting local IP
+string getIP() { // Func for getting local IP
 #if defined(_WIN32) || defined(_WIN64)
     WSADATA wsaData;
     char hostname[256];
