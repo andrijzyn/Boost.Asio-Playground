@@ -2,8 +2,7 @@
 
 // Hosting function (pending connection)
 void Host(boost::asio::io_service& io_service, const string& address, unsigned short port) {
-
-    tcp::acceptor acceptor(io_service, tcp::endpoint(tcp::v4(), port));
+    tcp::acceptor acceptor(io_service, tcp::endpoint(boost::asio::ip::address::from_string(address), port));
 
     while (true) {
         shared_ptr<tcp::socket> socket = make_shared<tcp::socket>(io_service);
@@ -35,6 +34,8 @@ void Host(boost::asio::io_service& io_service, const string& address, unsigned s
             } catch (const exception& e) {
                 cerr << "# Exception in client handling: " << e.what() << endl;
             }
+            // Close the socket when the client disconnects
+            socket->close();
         }).detach();
     }
 }
@@ -49,7 +50,35 @@ shared_ptr<tcp::socket> Connect(boost::asio::io_service& io_service, const strin
     return socket;
 }
 
+// Function to send and receive messages
+void Communicate(const std::shared_ptr<tcp::socket>& socket) {
+    while (true) {
+        auto message = get("Enter message: ");
+        if (*message == "0") {
+            break;
+        }
+        boost::asio::write(*socket, boost::asio::buffer(*message)); // Send message
+
+        boost::asio::streambuf receive_buffer;
+        boost::system::error_code error;
+        boost::asio::read_until(*socket, receive_buffer, '\n', error); // Receive message
+
+        if (error) {
+            if (error == boost::asio::error::eof) {
+                cout << "Connection closed by server." << endl;
+            } else {
+                cerr << "Error on receive: " << error.message() << endl;
+            }
+            break;
+        }
+
+        std::string response(boost::asio::buffer_cast<const char*>(receive_buffer.data()));
+        std::cout << "Server response: " << response;
+    }
+}
+
 int main() {
+    unsigned short port = 8080;
     try {
         boost::asio::io_service io_service;
 
@@ -57,35 +86,29 @@ int main() {
         std::cout << "Your IP address: " << getIP() << std::endl;
 
         // Getting the "operating mode" from the user
-        auto mode = get("Choose mode:\n1. Hosting\n2. Connecting\n: ");
+        auto mode = get("Choose mode:  (1. Hosting), (2. Connecting), (Ctrl+C. Close): ");
 
-        if (mode && *mode == "1") {
-            // Hosting
+        if (mode && *mode == "1") { // Hosting
             string address = getIP(); // IP address of the current host
-            unsigned short port = 8080; // Port for listening
-            thread t([&io_service, address, port]() {
+
+            thread host_thread([&io_service, address, port]() {
                 Host(io_service, address, port);
             });
+            // Run the io_service to handle incoming connections
             io_service.run();
-            t.join(); // Wait for the hosting thread to finish
-        } else if (mode && *mode == "2") {
-            // Connecting
+            host_thread.join(); // Wait for the host thread to finish (although it runs infinitely)
+        } else if (mode && *mode == "2") { // Connecting
             auto serverAddress = get("Enter server IP: ");
 
-            unsigned short port = 8080; // Port for connection
             std::shared_ptr<tcp::socket> socket = Connect(io_service, *serverAddress, port);
+            cout << "You have been connected to the server.\n\n";
 
-            // Sending a message to the server
-            auto message = get("Enter message: ");
-            boost::asio::write(*socket, boost::asio::buffer(*message));
-
-            // Receiving a response from the server
-            boost::asio::streambuf receive_buffer;
-            boost::asio::read_until(*socket, receive_buffer, '\n');
-            std::string response(boost::asio::buffer_cast<const char*>(receive_buffer.data()));
-            std::cout << "Server response: " << response;
-
-            io_service.run();
+            // Communicate with the server
+            thread comm_thread([socket]() {
+                Communicate(socket);
+            });
+            comm_thread.join(); // Wait for the communication thread to finish
+            io_service.run(); // Run the io_service to handle asynchronous events
         } else {
             std::cerr << "Invalid mode selection." << std::endl;
             return 1;

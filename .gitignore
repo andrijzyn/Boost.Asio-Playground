@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+Hybrid
+
+# Folders
+cmake-build-debug/
+.vscode/
+.cache/
+.idea/
