@@ -38,5 +38,8 @@ Run the following commands:
 After successfully compiling the project, you will find the executable files server and client in the build directory.
 Run the server executable to start the TCP server.
 Run the client executable to connect to the server and communicate.
+> [!WARNING] 
+> At this point, this project has been abandoned!
+
 > [!TIP]
 > If something doesn't work... please fix it and let me know...
